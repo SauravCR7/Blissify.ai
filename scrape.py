@@ -69,8 +69,8 @@ def getMusic(percent):
             links.append(elem.get_attribute("href"))
     driver.close()
 
-    return list(names,links)
-
+    k = {'x':names,'y':links}
+    return k
 #fix this call. Edit the integer to be passed and select genre based on mood
 tup = getMusic(40)
-#print(tup)
+print(tup)
