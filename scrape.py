@@ -6,8 +6,12 @@ Created on Fri Mar 23 21:58:30 2018
 """
 
 def getMusic(percent):
-    percent = 40
-    strr = "blues"
+    if(percent < -20):
+        str = "blues"
+    elif(percent > -20 and percent < 20):
+        str = "classical"
+    else:
+        str = "alt-rock"
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.support.ui import Select
@@ -27,8 +31,6 @@ def getMusic(percent):
         move.click_and_hold(slidebar).move_by_offset(percent * width / 100, 0).release().perform()
     else:
        move.click_and_hold(slidebar).move_by_offset(percent * height / 100, 0).release().perform()
-
-    #driver.switch_to_default_content()
     
     slidebar = driver.find_element_by_xpath('/html/body/div/div/div[2]/div[1]/div[3]/div[2]/input')
     height = slidebar.size['height']
@@ -52,48 +54,23 @@ def getMusic(percent):
     
     btn = driver.find_element_by_xpath('/html/body/div/div/div[2]/div[1]/div[5]/button')
     btn.click()
+    driver.implicitly_wait(50)
     #driver.close()
-    names = driver.find_elements_by_class_name("title")
-    if(names is not None):
-        print("Got it")
-    else:
-        print("Didn't")
-    for name in names:
-        print(name.text)
-    #print(names)
-    links = driver.find_elements_by_class_name("fa fa-youtube")
-    if(links is not None):
-        print("Got it")
-    else:
-        print("Didn't")
-    for t in links:
-        print (t.link)
-      
+    names1 = driver.find_elements_by_class_name("title")
+    names = []
+    for name in names1:
+        names.append(name.text)
+    
+    links = []
+    
+    elems = driver.find_elements_by_xpath("//a[@href]")
+    for elem in elems:
+        if(elem.get_attribute("href").startswith('https://www.youtube.com')):
+            links.append(elem.get_attribute("href"))
+    driver.close()
+
+    return list(names,links)
 
 #fix this call. Edit the integer to be passed and select genre based on mood
-getMusic(40)
-
-#for 
-    en1 = driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/div[2]/div[1]/div[1]')
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+tup = getMusic(40)
+#print(tup)
