@@ -6,6 +6,7 @@ Created on Fri Mar 23 21:58:30 2018
 """
 
 def getMusic(percent):
+    percent = 40
     strr = "blues"
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
@@ -60,17 +61,17 @@ def getMusic(percent):
     for name in names:
         print(name.text)
     #print(names)
-    links = driver.find_elements_by_class_name("links")
+    links = driver.find_elements_by_class_name("fa fa-youtube")
     if(links is not None):
         print("Got it")
     else:
         print("Didn't")
-    for t in t_links:
-        print (t.text)
+    for t in links:
+        print (t.link)
       
 
 #fix this call. Edit the integer to be passed and select genre based on mood
-getMusic(-40)
+getMusic(40)
 
 #for 
     en1 = driver.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/div[2]/div[1]/div[1]')
