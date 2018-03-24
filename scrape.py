@@ -7,16 +7,19 @@ Created on Fri Mar 23 21:58:30 2018
 
 def getMusic(percent):
     if(percent < -20):
-        str = "blues"
+        strr = "blues"
     elif(percent > -20 and percent < 20):
-        str = "classical"
+        strr = "classical"
     else:
-        str = "alt-rock"
+        strr = "alt-rock"
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.support.ui import Select
     
+    #for Firefox
     driver = webdriver.Firefox()
+    #for Chrome
+    #driver = webdriver.Chrome()
     driver.get("https://moodfuse.com/")
     select = Select(driver.find_element_by_name("genre"))
     select.select_by_visible_text(strr)
